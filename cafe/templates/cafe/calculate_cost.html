@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculate Cost</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cafe/calculate_cost.css' %}">
+</head>
+
+<body>
+    <h1>Calculate Cost</h1>
+    <form action="{% url 'display_cost' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="rate_price" value="{{ rate_price }}">
+        <input type="hidden" name="vip_question" value="{{ vip_question }}">
+        <input type="hidden" name="vip_discount_rate" value="{{ vip_discount_rate }}">
+        <label for="hour">How many hours did you play? (Leave empty if minutes)</label>
+        <input type="number" step="0.01" name="hour">
+        <br>
+        <label for="minute">How many minutes did you play? (Leave empty if hours)</label>
+        <input type="number" name="minute">
+        <br>
+        <input type="hidden" name="discount_enabled" value="{{ discount_enabled }}">
+        <input type="submit" value="Calculate Cost">
+    </form>
+</body>
+
+</html>

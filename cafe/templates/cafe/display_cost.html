@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cost Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cafe/display_cost.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cost Details</h1>
+        <div class="cost-info">
+            {% if discount_enabled %}
+                <p>You played for <span class="time">{{ hour }}</span> hour(s) and <span class="time">{{ minute }}</span> minute(s).</p>
+                <p>The cost with a special member discount is:</p>
+                <p class="cost">{{ cost }}</p>
+            {% else %}
+                <p>You played for <span class="time">{{ hour }}</span> hour(s) and <span class="time">{{ minute }}</span> minute(s).</p>
+                <p>The cost is:</p>
+                <p class="cost">{{ cost }} Toumaan</p>
+            {% endif %}
+        </div>
+        <a href="/" class="button">Home</a>
+    </div>
+</body>
+
+</html>

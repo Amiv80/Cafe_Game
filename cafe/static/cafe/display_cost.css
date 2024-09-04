@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 18px;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+    padding: 40px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #00abe4;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.cost-info {
+    margin-bottom: 30px;
+}
+
+.time {
+    font-weight: bold;
+}
+
+.cost {
+    font-size: 26px;
+    font-family: Tahoma;
+    color: #ff0000;
+    margin-top: 10px;
+}
+
+.button {
+    display: inline-block;
+    padding: 15px 25px;
+    background-color: #00ffe1;
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #00ff80;
+}

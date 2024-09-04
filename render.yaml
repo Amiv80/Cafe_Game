@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: Project_Cafe
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn cafe_website.wsgi
+    autoDeploy: true
+    envVars:
+      - key: DATABASE_URL
+        value: postgres://cafe_database_kq7c_user:w1zECxKERBd903T2YsMse7G3lvVUpZO2@dpg-crc16brv2p9s73dl6aug-a:5432/Cafe_database
+      - key: SECRET_KEY
+        value: "django-insecure-rz8q0(_%w*_@o#ux3-whhg+pp0v=helx+=h*^$52bs6&b^dvbn"
+    build:
+      - pip install -r requirements.txt
+      - python manage.py collectstatic --noinput

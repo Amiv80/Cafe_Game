@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to Cafe</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'cafe/home.css' %}">
+</head>
+
+<body>
+    <h1>Welcome to Cafe...!</h1>
+    <form action="{% url 'calculate_cost' %}" method="post">
+        {% csrf_token %}
+        <label for="rate_price">Rate per hour of the game:</label>
+        <input type="number" step="0.01" name="rate_price" required>
+        
+        <label for="vip_member">Select a VIP Member:</label>
+        <select name="vip_member">
+            {% for member_id, member_name in vip_member_choices %}
+                <option value="{{ member_id }}">{{ member_name }}</option>
+            {% endfor %}
+        </select>
+        
+        <label for="vip_discount_rate">Discount amount for VIP members:</label>
+        <input type="number" step="0.01" name="vip_discount_rate" required>
+        <input type="submit" value="Next Step">
+    </form>
+
+    <a href="/admin" class="admin-button">Go to Admin</a>
+</body>
+</html>
