@@ -26,7 +26,7 @@ SECRET_KEY = config("SECRET_KEY")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["project-cafe-yopp.onrender.com", "*"]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS")
 
 
 INSTALLED_APPS = [
