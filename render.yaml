@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: Project_Cafe
+    name: Cafe_Game
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn cafe_website.wsgi
