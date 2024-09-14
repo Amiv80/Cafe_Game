@@ -11,31 +11,39 @@
     <h1>Welcome to Cafe...!</h1>
 
     <!-- Display each member with their visit count -->
-    <h2>Member Visit Counts</h2>
+    {% comment %} <h2>Member Visit Counts</h2>
     <ul>
         {% for member in members %}
             <li>{{ member.name }} - Visits: {{ member.count }}</li>
         {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
 
+    <!-- Form to calculate cost -->
     <form action="{% url 'calculate_cost' %}" method="post">
         {% csrf_token %}
+        
+        <!-- Rate per hour input -->
         <label for="rate_price">Rate per hour of the game:</label>
-        <input type="number" step="0.01" name="rate_price" required>
-
+        <input type="number" id="rate_price" name="rate_price" step="0.01" required>
+        
+        <!-- Select VIP Member -->
         <label for="vip_member">Select a VIP Member:</label>
-        <select name="vip_member">
+        <select id="vip_member" name="vip_member" required>
             <option value="">-- Select a VIP Member --</option>
             {% for member_id, member_name in vip_member_choices %}
                 <option value="{{ member_id }}">{{ member_name }}</option>
             {% endfor %}
         </select>
 
+        <!-- VIP discount rate input -->
         <label for="vip_discount_rate">Discount amount for VIP members:</label>
-        <input type="number" step="0.01" name="vip_discount_rate" required>
+        <input type="number" id="vip_discount_rate" name="vip_discount_rate" step="0.01" required>
+        
+        <!-- Submit button -->
         <input type="submit" value="Next Step">
     </form>
 
+    <!-- Link to admin page -->
     <a href="/admin" class="admin-button">Go to Admin</a>
 </body>
 </html>

@@ -84,6 +84,7 @@
                         <th scope="col">Name</th>
                         <th scope="col">VIP Member</th>
                         <th scope="col">Date Added</th>
+                        <th scope="col">Visit Count</th> <!-- New column for visit count -->
                     </tr>
                 </thead>
                 <tbody>
@@ -92,6 +93,7 @@
                         <td>{{ member.name }}</td>
                         <td>{{ member.vip_member|yesno:"Yes,No" }}</td>
                         <td>{{ member.date_add }}</td>
+                        <td>{{ member.count }}</td> <!-- Display visit count -->
                     </tr>
                     {% endfor %}
                 </tbody>

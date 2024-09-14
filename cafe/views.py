@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Member
 
@@ -30,8 +30,8 @@ def home(request):
             except Member.DoesNotExist:
                 return HttpResponse("Member does not exist")
 
-        # Additional code for handling the POST request...
-        return render(request, "cafe/home.html")
+        # Redirect to the 'home' URL to refresh the page
+        return redirect("home")
     else:
         vip_members = Member.objects.all()
         vip_member_choices = [(member.id, member.name) for member in vip_members]
@@ -55,10 +55,19 @@ def calculate_cost(request):
         vip_discount_rate = float(request.POST.get("vip_discount_rate"))
 
         vip_member_id = request.POST.get("vip_member")
+        discount_enabled = False
+
+        # Increment the visit count for the selected VIP member
         if vip_member_id:
-            discount_enabled = True
-        else:
-            discount_enabled = False
+            try:
+                member = Member.objects.get(id=vip_member_id)
+                member.count += 1  # Increment the visit count
+                member.save()  # Save the changes to the database
+                discount_enabled = (
+                    True  # Enable discount since a VIP member is selected
+                )
+            except Member.DoesNotExist:
+                return HttpResponse("Member does not exist")
 
         context = {
             "rate_price": rate_price,
