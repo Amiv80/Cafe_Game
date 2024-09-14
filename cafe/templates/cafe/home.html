@@ -9,18 +9,28 @@
 
 <body>
     <h1>Welcome to Cafe...!</h1>
+
+    <!-- Display each member with their visit count -->
+    <h2>Member Visit Counts</h2>
+    <ul>
+        {% for member in members %}
+            <li>{{ member.name }} - Visits: {{ member.count }}</li>
+        {% endfor %}
+    </ul>
+
     <form action="{% url 'calculate_cost' %}" method="post">
         {% csrf_token %}
         <label for="rate_price">Rate per hour of the game:</label>
         <input type="number" step="0.01" name="rate_price" required>
-        
+
         <label for="vip_member">Select a VIP Member:</label>
         <select name="vip_member">
+            <option value="">-- Select a VIP Member --</option>
             {% for member_id, member_name in vip_member_choices %}
                 <option value="{{ member_id }}">{{ member_name }}</option>
             {% endfor %}
         </select>
-        
+
         <label for="vip_discount_rate">Discount amount for VIP members:</label>
         <input type="number" step="0.01" name="vip_discount_rate" required>
         <input type="submit" value="Next Step">

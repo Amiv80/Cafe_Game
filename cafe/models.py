@@ -1,9 +1,11 @@
 from django.db import models
 
+
 class Member(models.Model):
     name = models.CharField(verbose_name=("Name"), max_length=50)
     vip_member = models.BooleanField(verbose_name=("VIP Members"), default=False)
     date_add = models.DateField(auto_now_add=True)
+    count = models.IntegerField(verbose_name=("count"), default=0)
 
     class Meta:
         ordering = ["name"]

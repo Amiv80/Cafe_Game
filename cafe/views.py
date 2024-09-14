@@ -20,12 +20,32 @@ def hour_price(integer, decimal, price):
 
 def home(request):
     if request.method == "POST":
-        ...
+        # Increment the visit count for the selected VIP member
+        vip_member_id = request.POST.get("vip_member")
+        if vip_member_id:
+            try:
+                member = Member.objects.get(id=vip_member_id)
+                member.count += 1  # Increment the visit count
+                member.save()  # Save the changes to the database
+            except Member.DoesNotExist:
+                return HttpResponse("Member does not exist")
+
+        # Additional code for handling the POST request...
+        return render(request, "cafe/home.html")
     else:
         vip_members = Member.objects.all()
         vip_member_choices = [(member.id, member.name) for member in vip_members]
+        total_members = Member.objects.count()  # Get the total count of members
+
+        # Pass all members to the template for displaying their visit counts
         return render(
-            request, "cafe/home.html", {"vip_member_choices": vip_member_choices}
+            request,
+            "cafe/home.html",
+            {
+                "vip_member_choices": vip_member_choices,
+                "total_members": total_members,
+                "members": vip_members,  # Pass all members to the template
+            },
         )
 
 
@@ -90,7 +110,20 @@ def display_cost(request):
         return HttpResponse("Invalid request")
 
 
+def member_list(request):
+    members = Member.objects.all()  # Fetch all members from the database
+    return render(request, "cafe/member_list.html", {"members": members})
+
+
+def member_count():
+    return Member.objects.count()
+
 
 def member_list(request):
     members = Member.objects.all()  # Fetch all members from the database
-    return render(request, 'cafe/member_list.html', {'members': members})
+    total_members = member_count()  # Get the total count of members
+    return render(
+        request,
+        "cafe/member_list.html",
+        {"members": members, "total_members": total_members},
+    )
